@@ -1,6 +1,7 @@
 from mcp import ServerSession, stdio_server
 import sys
 import logging
+import asyncio
 
 # Set up logging to stderr since stdout is used for stdio server
 logging.basicConfig(
@@ -34,7 +35,7 @@ def main():
         logger.info("Starting server...")
         server = MCPPythonServer()
         logger.info("Server created, waiting for connections...")
-        stdio_server(server.session)
+        asyncio.run(stdio_server(server.session))
     except Exception as e:
         logger.error(f"Error starting server: {e}", exc_info=True)
         sys.exit(1)
