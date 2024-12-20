@@ -1,4 +1,5 @@
-from mcp.server import Server, RPCServer
+from mcp.server import Server
+from mcp.protocol.jsonrpc import RPCServer
 from mcp.handlers import RequestHandler
 import sys
 import logging
