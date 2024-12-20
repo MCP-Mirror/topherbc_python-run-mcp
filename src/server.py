@@ -9,10 +9,7 @@ class MCPPythonServer:
             init_options={}
         )
         
-        # Register handlers
-        self.session.register_handler("run_python", self.handle_run_python)
-    
-    async def handle_run_python(self, request):
+    async def run_python(self, request):
         # Mock response for now
         return {
             "result": "mock_result",
