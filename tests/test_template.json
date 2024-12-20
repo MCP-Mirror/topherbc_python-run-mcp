@@ -1,0 +1,16 @@
+{
+  "server": "http://localhost:8080",
+  "tests": [
+    {
+      "endpoint": "run_python",
+      "name": "Test Name",
+      "request": {
+        "code": "# Your Python code here"
+      },
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "status": "success"
+      }
+    }
+  ]
+}
