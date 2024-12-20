@@ -1,4 +1,4 @@
-from model_context_protocol import MCPServer, RunPythonRequest, RunPythonResponse
+from mcp import MCPServer, RunPythonRequest, RunPythonResponse
 
 def handle_run_python(request: RunPythonRequest) -> RunPythonResponse:
     # Mock response as per requirements
