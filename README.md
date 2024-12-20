@@ -20,6 +20,25 @@ pip install -r requirements.txt
 python src/server.py
 ```
 
+## Testing with MCP Inspector
+
+1. Start the server:
+```bash
+python src/server.py
+```
+
+2. In a new terminal, run the inspector:
+```bash
+npx @modelcontextprotocol/inspector
+```
+
+3. Use provided test configurations:
+```bash
+npx @modelcontextprotocol/inspector --config tests/basic_test.json
+```
+
+See `docs/inspector/README.md` for detailed testing instructions.
+
 ## API
 
 ### run_python
@@ -47,4 +66,6 @@ Response format:
 1. Clone the repository
 2. Install dependencies
 3. Run the server
-4. Test with an MCP client
+4. Test with MCP inspector
+
+See the `tests/` directory for example test cases and configurations.
