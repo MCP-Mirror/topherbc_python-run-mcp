@@ -1,4 +1,4 @@
-from mcp import ServerSession, stdio_server
+from mcp import Server, RPCServer, RequestHandler
 import sys
 import logging
 import asyncio
@@ -11,16 +11,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-class MCPPythonServer:
-    def __init__(self):
-        logger.info("Initializing MCP Python Server...")
-        self.session = ServerSession(
-            read_stream=sys.stdin.buffer,
-            write_stream=sys.stdout.buffer,
-            init_options={}
-        )
-        logger.info("Server session initialized")
-        
+class PythonRequestHandler(RequestHandler):
     async def run_python(self, request):
         logger.info("Received run_python request")
         # Mock response for now
@@ -30,19 +21,24 @@ class MCPPythonServer:
             "stderr": ""
         }
 
-async def run_server():
+async def main():
     try:
         logger.info("Starting server...")
-        server = MCPPythonServer()
+        server = Server("python-executor")
+        handler = PythonRequestHandler()
+        server.add_handler(handler)
+
+        rpc_server = RPCServer(
+            server,
+            read_stream=sys.stdin.buffer,
+            write_stream=sys.stdout.buffer
+        )
+        
         logger.info("Server created, waiting for connections...")
-        async with stdio_server(server.session) as session:
-            await session.run()
+        await rpc_server.serve()
     except Exception as e:
         logger.error(f"Error starting server: {e}", exc_info=True)
         sys.exit(1)
 
-def main():
-    asyncio.run(run_server())
-
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
