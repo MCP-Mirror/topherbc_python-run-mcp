@@ -1,4 +1,4 @@
-from modelcontextprotocol import MCPServer, Request, Response
+from model_context_protocol import MCPServer, Request, Response
 
 class PythonExecutionServer(MCPServer):
     async def handle_run_python(self, request: Request) -> Response:
