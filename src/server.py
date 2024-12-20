@@ -3,8 +3,6 @@ from mcp import ServerSession, stdio_server
 class MCPPythonServer:
     def __init__(self):
         self.session = ServerSession(
-            name="mcp-python-server",
-            version="0.1.0",
             capabilities={}
         )
         
