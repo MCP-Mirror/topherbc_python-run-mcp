@@ -1,12 +1,12 @@
 from fastapi import FastAPI, HTTPException
 from mcp import ServerSession
-from mcp.types import RunPythonRequest, RunPythonResponse
+from .types import RunPythonRequestParams, RunPythonResponse
 
 app = FastAPI()
 server = ServerSession()
 
 @app.post("/run_python")
-async def run_python(request: RunPythonRequest) -> RunPythonResponse:
+async def run_python(request: RunPythonRequestParams) -> RunPythonResponse:
     try:
         # Mock response for now
         return RunPythonResponse(
