@@ -1,5 +1,4 @@
-from mcp.server import Server
-from mcp.rpc import RPCServer
+from mcp.server import Server, RPCServer
 from mcp.handlers import RequestHandler
 import sys
 import logging
