@@ -2,9 +2,7 @@ from mcp import ServerSession, stdio_server
 
 class MCPPythonServer:
     def __init__(self):
-        self.session = ServerSession(
-            capabilities={}
-        )
+        self.session = ServerSession()
         
         # Register handlers
         self.session.register_handler("run_python", self.handle_run_python)
