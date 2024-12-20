@@ -1,8 +1,13 @@
 from mcp import ServerSession, stdio_server
+import sys
 
 class MCPPythonServer:
     def __init__(self):
-        self.session = ServerSession()
+        self.session = ServerSession(
+            read_stream=sys.stdin.buffer,
+            write_stream=sys.stdout.buffer,
+            init_options={}
+        )
         
         # Register handlers
         self.session.register_handler("run_python", self.handle_run_python)
