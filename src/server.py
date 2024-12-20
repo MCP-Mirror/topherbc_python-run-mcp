@@ -30,15 +30,19 @@ class MCPPythonServer:
             "stderr": ""
         }
 
-def main():
+async def run_server():
     try:
         logger.info("Starting server...")
         server = MCPPythonServer()
         logger.info("Server created, waiting for connections...")
-        asyncio.run(stdio_server(server.session))
+        async with stdio_server(server.session) as session:
+            await session.run()
     except Exception as e:
         logger.error(f"Error starting server: {e}", exc_info=True)
         sys.exit(1)
+
+def main():
+    asyncio.run(run_server())
 
 if __name__ == "__main__":
     main()
