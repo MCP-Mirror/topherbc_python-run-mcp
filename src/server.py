@@ -1,24 +1,21 @@
-from fastapi import FastAPI, HTTPException
-from mcp import ServerSession
-from .types import RunPythonRequestParams, RunPythonResponse
+from model_context_protocol import MCPServer, RunPythonRequest, RunPythonResponse
 
-app = FastAPI()
-server = ServerSession()
+def handle_run_python(request: RunPythonRequest) -> RunPythonResponse:
+    # Mock response as per requirements
+    return RunPythonResponse(
+        result="mock_result",
+        stdout="mock output",
+        stderr=""
+    )
 
-@app.post("/run_python")
-async def run_python(request: RunPythonRequestParams) -> RunPythonResponse:
-    try:
-        # Mock response for now
-        return RunPythonResponse(
-            status="success",
-            result={
-                "output": "Mock output",
-                "error": None
-            }
-        )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+def main():
+    server = MCPServer(
+        name="mcp-server",
+        version="0.1.0"
+    )
+    
+    server.register_handler("run_python", handle_run_python)
+    server.start()
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    main()
