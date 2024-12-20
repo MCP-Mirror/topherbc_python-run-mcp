@@ -1,9 +1,9 @@
 from fastapi import FastAPI, HTTPException
-from mcp import MCPServer
+from mcp import ServerSession
 from mcp.types import RunPythonRequest, RunPythonResponse
 
 app = FastAPI()
-mcp_server = MCPServer()
+server = ServerSession()
 
 @app.post("/run_python")
 async def run_python(request: RunPythonRequest) -> RunPythonResponse:
