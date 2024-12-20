@@ -1,4 +1,5 @@
-from mcp.server import Server, RPCServer, RequestHandler
+from mcp.server import Server, RequestHandler
+from mcp.rpc import RPCServer
 import sys
 import logging
 import asyncio
