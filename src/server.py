@@ -1,20 +1,24 @@
-from model_context_protocol import MCPServer, Request, Response
+from fastapi import FastAPI, HTTPException
+from mcp import MCPServer
+from mcp.types import RunPythonRequest, RunPythonResponse
 
-class PythonExecutionServer(MCPServer):
-    async def handle_run_python(self, request: Request) -> Response:
-        """Handle Python code execution requests (currently mocked)"""
+app = FastAPI()
+mcp_server = MCPServer()
+
+@app.post("/run_python")
+async def run_python(request: RunPythonRequest) -> RunPythonResponse:
+    try:
         # Mock response for now
-        return Response({
-            'status': 'success',
-            'output': 'Hello from Python execution!',
-            'result': 42
-        })
+        return RunPythonResponse(
+            status="success",
+            result={
+                "output": "Mock output",
+                "error": None
+            }
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-    async def start(self):
-        """Start the MCP server"""
-        self.register_handler('run_python', self.handle_run_python)
-        await super().start()
-
-if __name__ == '__main__':
-    server = PythonExecutionServer()
-    server.start()
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
