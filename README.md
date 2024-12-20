@@ -1,12 +1,12 @@
 # MCP Python Execution Server
 
-A Python implementation of a Model Context Protocol server that supports Python code execution requests using FastMCP.
+A Python implementation of a Model Context Protocol server that supports Python code execution requests.
 
 ## Features
 
 - Handles `run_python` requests
 - Returns mock responses (to be implemented with actual Python execution)
-- Built using FastMCP for simpler, more Pythonic MCP implementation
+- Built using the MCP Python SDK
 
 ## Installation
 
@@ -26,6 +26,8 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
+
+This will install the MCP Python SDK directly from GitHub along with other dependencies.
 
 ## Usage
 
